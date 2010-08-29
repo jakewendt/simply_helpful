@@ -1,5 +1,3 @@
-#module RailsHelpers
-#module FormHelper
 module RailsHelpers::FormHelper
 
 	def field_wrapper(method,&block)
@@ -87,7 +85,6 @@ module RailsHelpers::FormHelper
 	end
 
 end
-#end
 ActionView::Base.send(:include, RailsHelpers::FormHelper)
 
 

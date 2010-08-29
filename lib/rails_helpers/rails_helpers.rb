@@ -1,5 +1,3 @@
-#module RailsHelpers
-#module RailsHelpers
 module RailsHelpers::RailsHelpers
 
 	def form_link_to( title, url, options={} )
@@ -88,5 +86,4 @@ module RailsHelpers::RailsHelpers
 	end
 
 end
-#end
 ActionView::Base.send(:include, RailsHelpers::RailsHelpers)
