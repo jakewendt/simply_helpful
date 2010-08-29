@@ -1,4 +1,6 @@
-module RailsHelpers
+#module RailsHelpers
+#module RailsHelpers
+module RailsHelpers::RailsHelpers
 
 	def form_link_to( title, url, options={} )
 		extra_tags = extra_tags_for_form(options)
@@ -86,4 +88,5 @@ module RailsHelpers
 	end
 
 end
-ActionView::Base.send(:include, RailsHelpers)
+#end
+ActionView::Base.send(:include, RailsHelpers::RailsHelpers)

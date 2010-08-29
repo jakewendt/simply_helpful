@@ -1,0 +1,21 @@
+= Rails Helpers
+
+
+== Installation / Usage
+
+ config.gem 'jakewendt-rails_helpers',
+   :lib    => 'rails_helpers',
+   :source => 'http://rubygems.org'
+
+== Gemified with Jeweler
+
+ vi Rakefile
+ rake version:write
+ rake gemspec
+ rake install
+
+ rake version:bump:major
+ rake release
+
+
+Copyright (c) 2010 [George 'Jake' Wendt], released under the MIT license

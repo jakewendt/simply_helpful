@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{jakewendt-rails_helpers}
-  s.version = "0.0.0"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["George 'Jake' Wendt"]
@@ -16,7 +16,9 @@ Gem::Specification.new do |s|
     "README.rdoc"
   ]
   s.files = [
-    "lib/rails_helpers.rb"
+    "lib/rails_helpers.rb",
+     "lib/rails_helpers/form_helper.rb",
+     "lib/rails_helpers/rails_helpers.rb"
   ]
   s.homepage = %q{http://github.com/jakewendt/rails_helpers}
   s.rdoc_options = ["--charset=UTF-8"]
