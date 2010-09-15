@@ -48,6 +48,13 @@ module RailsHelpers::FormHelper
 	end
 	alias_method :wrapped_gender_select, :wrapped_sex_select
 
+	def wrapped_select(object_name, method, choices, options, html_options)
+		field_wrapper(method) do
+			s =  label( object_name, method, options.delete(:label_text) )
+			s << select( object_name, method, choices, options, html_options )
+		end
+	end
+
 	def wrapped_text_area(object_name,method,options={})
 		field_wrapper(method) do
 			s =  label( object_name, method, options.delete(:label_text) )
@@ -110,6 +117,13 @@ ActionView::Helpers::FormBuilder.class_eval do
 				html_options)
 	end
 	alias_method :gender_select, :sex_select
+
+	def wrapped_select(method,choices,options={},html_options={})
+		@template.wrapped_select(
+			@object_name, method, choices,
+				objectify_options(options),
+				html_options)
+	end
 
 	def wrapped_sex_select(method,options={},html_options={})
 		@template.wrapped_sex_select(
