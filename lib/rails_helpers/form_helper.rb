@@ -23,6 +23,19 @@ module RailsHelpers::FormHelper
 		end
 	end
 
+	def wrapped_grouped_collection_select(object_name,method,
+		collection, group_method, group_label_method,
+		option_key_method, option_value_method,
+		options={},html_options={})
+		field_wrapper(method) do
+			s =  label( object_name, method, options.delete(:label_text) )
+			s << grouped_collection_select( object_name, method, 
+				collection, group_method, group_label_method,
+				option_key_method, option_value_method,
+				options, html_options )
+		end
+	end
+
 	def wrapped_spans(object_name,method,options={})
 		field_wrapper(method) do
 			object = instance_variable_get("@#{object_name}")
@@ -101,6 +114,18 @@ ActionView::Helpers::FormBuilder.class_eval do
 		collection,value_method,text_method,options={},html_options={})
 		@template.wrapped_collection_select(
 			@object_name, method, collection,value_method,text_method,
+				objectify_options(options),
+				html_options)
+	end
+
+	def wrapped_grouped_collection_select(method, 
+		collection, group_method, group_label_method,
+		option_key_method, option_value_method,
+		options={},html_options={})
+		@template.wrapped_grouped_collection_select(
+			@object_name, method, collection,
+				group_method, group_label_method,
+				option_key_method, option_value_method,
 				objectify_options(options),
 				html_options)
 	end
