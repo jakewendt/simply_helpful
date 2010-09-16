@@ -38,10 +38,14 @@ module RailsHelpers::FormHelper
 
 	def wrapped_spans(object_name,method,options={})
 		field_wrapper(method) do
-			object = instance_variable_get("@#{object_name}")
 			s =  "<span class='label'>#{options[:label_text]||method}</span>\n"
-			value = object.send(method)
-			value = (value.to_s.blank?)?'&nbsp;':value
+			value = if options[:value]
+				options[:value]
+			else
+				object = instance_variable_get("@#{object_name}")
+				value = object.send(method)
+				value = (value.to_s.blank?)?'&nbsp;':value
+			end
 			s << "<span class='value'>#{value}</span>"
 		end
 	end
