@@ -79,6 +79,24 @@ module RailsHelpers::FormHelper
 		end
 	end
 
+	def date_text_field(object_name,method,options={})
+		format = options.delete(:format) || '%m/%d/%Y'
+		options[:value] = if options[:value].blank?
+			object = options[:object]
+			object.send("#{method}").try(:to_date).try(:strftime,format)
+		else
+			options[:value].to_date.try(:strftime,format)
+		end
+		text_field( object_name, method, options )
+	end
+
+	def wrapped_date_text_field(object_name,method,options={})
+		field_wrapper(method) do
+			s =  label( object_name, method, options.delete(:label_text) )
+			s << date_text_field( object_name, method, options )
+		end
+	end
+
 	def wrapped_text_field(object_name,method,options={})
 		field_wrapper(method) do
 			s =  label( object_name, method, options.delete(:label_text) )
@@ -169,6 +187,16 @@ ActionView::Helpers::FormBuilder.class_eval do
 
 	def wrapped_text_field(method, options = {})
 		@template.wrapped_text_field(
+			@object_name, method, objectify_options(options))
+	end
+
+	def date_text_field(method, options = {})
+		@template.date_text_field(
+			@object_name, method, objectify_options(options))
+	end
+
+	def wrapped_date_text_field(method, options = {})
+		@template.wrapped_date_text_field(
 			@object_name, method, objectify_options(options))
 	end
 
