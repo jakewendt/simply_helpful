@@ -153,6 +153,9 @@ module RailsHelpers::FormHelper
 #	using concat.  In order to avoid the duplication that
 #	would be caused if using <%= , I return nothing.
 #
+#	Actually, see javascript_tag code
+#	It works with or without a block
+#
 #	Rails 3 does things differently, so this will require
 #	an update to work with it.
 #
