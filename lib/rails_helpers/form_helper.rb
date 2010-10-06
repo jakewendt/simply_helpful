@@ -81,11 +81,17 @@ module RailsHelpers::FormHelper
 
 	def date_text_field(object_name,method,options={})
 		format = options.delete(:format) || '%m/%d/%Y'
-		options[:value] = if options[:value].blank?
+		tmp_value = if options[:value].blank?
 			object = options[:object]
-			object.send("#{method}").try(:to_date).try(:strftime,format)
+			tmp = object.send("#{method}") ||
+			      object.send("#{method}_before_type_cast")
 		else
-			options[:value].to_date.try(:strftime,format)
+			options[:value]
+		end
+		begin
+			options[:value] = tmp_value.to_date.try(:strftime,format)
+		rescue NoMethodError
+			options[:value] = tmp_value
 		end
 		text_field( object_name, method, options )
 	end
