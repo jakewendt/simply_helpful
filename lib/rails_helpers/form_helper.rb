@@ -147,6 +147,15 @@ module RailsHelpers::FormHelper
 				send("_#{method_name}",*args) << 
 					(( block_given? )? capture(&block) : '')
 			end)
+#
+#	Since I know of no way to determine whether this was called
+#	with <%= or <% , treating all the same like ( <% ) and
+#	using concat.  In order to avoid the duplication that
+#	would be caused if using <%= , I return nothing.
+#
+#	Rails 3 does things differently, so this will require
+#	an update to work with it.
+#
 			return ''
 		else
 			method_missing_without_wrapping(symb,*args, &block)
@@ -155,8 +164,9 @@ module RailsHelpers::FormHelper
 
 #
 #	The purpose of the method missing was to allow the 
-#	passing of an additional block to field wrapper.
-#	(essentially)
+#	passing of an additional block to field wrapper,
+#	(essentially), in order to have other stuff
+#	inside the field_wrapper
 #
 #	In order to pass a block from erb, it can't be <%=
 #	so I need to use concat, which goes away in rails 3.
