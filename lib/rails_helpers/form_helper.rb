@@ -2,42 +2,42 @@ module RailsHelpers::FormHelper
 
 	def field_wrapper(method,&block)
 		s =  "<div class='#{method} field_wrapper'>\n"
-		s << yield
+		s << yield 
 		s << "\n</div><!-- class='#{method}' -->"
 	end
 
-	def wrapped_check_box(object_name,method,options={})
-		field_wrapper(method) do
+	def _wrapped_check_box(object_name,method,options={})
+#		field_wrapper(method) do
 			s =  label( object_name, method, 
 				options.delete(:label_text) || "#{method.to_s.titleize}?" )
 			s << check_box( object_name, method, options )
-		end
+#		end
 	end
 
-	def wrapped_collection_select(object_name,method,
+	def _wrapped_collection_select(object_name,method,
 		collection,value_method,text_method,options={},html_options={})
-		field_wrapper(method) do
+#		field_wrapper(method) do
 			s =  label( object_name, method, options.delete(:label_text) )
 			s << collection_select( object_name, method, 
 				collection,value_method,text_method,options,html_options )
-		end
+#		end
 	end
 
-	def wrapped_grouped_collection_select(object_name,method,
+	def _wrapped_grouped_collection_select(object_name,method,
 		collection, group_method, group_label_method,
 		option_key_method, option_value_method,
 		options={},html_options={})
-		field_wrapper(method) do
+#		field_wrapper(method) do
 			s =  label( object_name, method, options.delete(:label_text) )
 			s << grouped_collection_select( object_name, method, 
 				collection, group_method, group_label_method,
 				option_key_method, option_value_method,
 				options, html_options )
-		end
+#		end
 	end
 
-	def wrapped_spans(object_name,method,options={})
-		field_wrapper(method) do
+	def _wrapped_spans(object_name,method,options={})
+#		field_wrapper(method) do
 			s =  "<span class='label'>#{options[:label_text]||method}</span>\n"
 			value = if options[:value]
 				options[:value]
@@ -47,7 +47,7 @@ module RailsHelpers::FormHelper
 				value = (value.to_s.blank?)?'&nbsp;':value
 			end
 			s << "<span class='value'>#{value}</span>"
-		end
+#		end
 	end
 
 	def sex_select(object_name, method, options, html_options)
@@ -57,26 +57,27 @@ module RailsHelpers::FormHelper
 	end
 	alias_method :gender_select, :sex_select
 
-	def wrapped_sex_select(object_name, method, options, html_options)
-		field_wrapper(method) do
+	def _wrapped_sex_select(object_name, method, options, html_options)
+#		field_wrapper(method) do
 			s =  label( object_name, method, options.delete(:label_text) )
 			s << sex_select( object_name, method, options, html_options )
-		end
+#		end
 	end
-	alias_method :wrapped_gender_select, :wrapped_sex_select
+#	alias_method :wrapped_gender_select, :wrapped_sex_select
+	alias_method :_wrapped_gender_select, :_wrapped_sex_select
 
-	def wrapped_select(object_name, method, choices, options, html_options)
-		field_wrapper(method) do
+	def _wrapped_select(object_name, method, choices, options, html_options)
+#		field_wrapper(method) do
 			s =  label( object_name, method, options.delete(:label_text) )
 			s << select( object_name, method, choices, options, html_options )
-		end
+#		end
 	end
 
-	def wrapped_text_area(object_name,method,options={})
-		field_wrapper(method) do
+	def _wrapped_text_area(object_name,method,options={})
+#		field_wrapper(method) do
 			s =  label( object_name, method, options.delete(:label_text) )
 			s << text_area( object_name, method, options )
-		end
+#		end
 	end
 
 	def date_text_field(object_name,method,options={})
@@ -96,27 +97,27 @@ module RailsHelpers::FormHelper
 		text_field( object_name, method, options )
 	end
 
-	def wrapped_date_text_field(object_name,method,options={})
-		field_wrapper(method) do
+	def _wrapped_date_text_field(object_name,method,options={})
+#		field_wrapper(method) do
 			s =  label( object_name, method, options.delete(:label_text) )
 			s << date_text_field( object_name, method, options )
-		end
+#		end
 	end
 
-	def wrapped_text_field(object_name,method,options={})
-		field_wrapper(method) do
+	def _wrapped_text_field(object_name,method,options={})
+#		field_wrapper(method) do
 			s =  label( object_name, method, options.delete(:label_text) )
 			s << text_field( object_name, method, options )
-		end
+#		end
 	end
 
-	def wrapped_yes_or_no_spans(object_name,method,options={})
-		field_wrapper(method) do
+	def _wrapped_yes_or_no_spans(object_name,method,options={})
+#		field_wrapper(method) do
 			object = instance_variable_get("@#{object_name}")
 			s =  "<span class='label'>#{options[:label_text]||method}</span>\n"
 			value = (object.send("#{method}?"))?'yes':'no'
 			s << "<span class='value'>#{value}</span>"
-		end
+#		end
 	end
 
 	def y_n_dk_select(object_name, method, options, html_options)
@@ -125,42 +126,71 @@ module RailsHelpers::FormHelper
 			options, html_options)
 	end
 
-	def wrapped_y_n_dk_select(object_name, method, options, html_options)
-		field_wrapper(method) do
+	def _wrapped_y_n_dk_select(object_name, method, options, html_options)
+#		field_wrapper(method) do
 			s =  label( object_name, method, options.delete(:label_text) )
 			s << y_n_dk_select( object_name, method, options, html_options )
+#		end
+	end
+
+
+	def self.included(base)
+		base.class_eval do
+			alias_method_chain :method_missing, :wrapping
 		end
 	end
 
+	def method_missing_with_wrapping(symb,*args, &block)
+		method_name = symb.to_s
+		if method_name =~ /^wrapped_(.+)$/
+			concat(field_wrapper(args[1]) do
+				send("_#{method_name}",*args) << 
+					(( block_given? )? capture(&block) : '')
+			end)
+			return ''
+		else
+			method_missing_without_wrapping(symb,*args, &block)
+		end
+	end
+
+#
+#	The purpose of the method missing was to allow the 
+#	passing of an additional block to field wrapper.
+#	(essentially)
+#
+#	In order to pass a block from erb, it can't be <%=
+#	so I need to use concat, which goes away in rails 3.
+#
 end
 ActionView::Base.send(:include, RailsHelpers::FormHelper)
 
 
 ActionView::Helpers::FormBuilder.class_eval do
 
-	def wrapped_collection_select(method, 
-		collection,value_method,text_method,options={},html_options={})
+	def wrapped_collection_select(method, collection,value_method,
+		text_method,options={},html_options={}, &block)
 		@template.wrapped_collection_select(
 			@object_name, method, collection,value_method,text_method,
 				objectify_options(options),
-				html_options)
+				html_options, &block)
 	end
 
 	def wrapped_grouped_collection_select(method, 
 		collection, group_method, group_label_method,
 		option_key_method, option_value_method,
-		options={},html_options={})
+		options={},html_options={},
+		&block)
 		@template.wrapped_grouped_collection_select(
 			@object_name, method, collection,
 				group_method, group_label_method,
 				option_key_method, option_value_method,
 				objectify_options(options),
-				html_options)
+				html_options, &block)
 	end
 
-	def wrapped_check_box(method, options = {})
-		@template.wrapped_check_box(
-			@object_name, method, objectify_options(options))
+	def wrapped_check_box(method, options = {}, &block)
+		@template.wrapped_check_box( @object_name, 
+			method, objectify_options(options), &block)
 	end
 
 	def sex_select(method,options={},html_options={})
@@ -171,29 +201,31 @@ ActionView::Helpers::FormBuilder.class_eval do
 	end
 	alias_method :gender_select, :sex_select
 
-	def wrapped_select(method,choices,options={},html_options={})
+	def wrapped_select(method,choices,options={},
+		html_options={}, &block)
 		@template.wrapped_select(
 			@object_name, method, choices,
 				objectify_options(options),
-				html_options)
+				html_options, &block)
 	end
 
-	def wrapped_sex_select(method,options={},html_options={})
+	def wrapped_sex_select(method,options={},
+		html_options={}, &block)
 		@template.wrapped_sex_select(
 			@object_name, method, 
 				objectify_options(options),
-				html_options)
+				html_options, &block)
 	end
 	alias_method :wrapped_gender_select, :wrapped_sex_select
 
-	def wrapped_text_area(method, options = {})
-		@template.wrapped_text_area(
-			@object_name, method, objectify_options(options))
+	def wrapped_text_area(method, options = {}, &block)
+		@template.wrapped_text_area( @object_name, 
+			method, objectify_options(options), &block)
 	end
 
-	def wrapped_text_field(method, options = {})
-		@template.wrapped_text_field(
-			@object_name, method, objectify_options(options))
+	def wrapped_text_field(method, options = {}, &block)
+		@template.wrapped_text_field( @object_name, 
+			method, objectify_options(options), &block)
 	end
 
 	def date_text_field(method, options = {})
@@ -201,9 +233,9 @@ ActionView::Helpers::FormBuilder.class_eval do
 			@object_name, method, objectify_options(options))
 	end
 
-	def wrapped_date_text_field(method, options = {})
-		@template.wrapped_date_text_field(
-			@object_name, method, objectify_options(options))
+	def wrapped_date_text_field(method, options = {}, &block)
+		@template.wrapped_date_text_field( @object_name, 
+			method, objectify_options(options), &block)
 	end
 
 	def y_n_dk_select(method,options={},html_options={})
@@ -213,11 +245,11 @@ ActionView::Helpers::FormBuilder.class_eval do
 				html_options)
 	end
 
-	def wrapped_y_n_dk_select(method,options={},html_options={})
+	def wrapped_y_n_dk_select(method,options={},html_options={},&block)
 		@template.wrapped_y_n_dk_select(
 			@object_name, method, 
 				objectify_options(options),
-				html_options)
+				html_options,&block)
 	end
 
 end
