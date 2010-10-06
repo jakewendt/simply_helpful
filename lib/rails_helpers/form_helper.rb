@@ -128,6 +128,14 @@ module RailsHelpers::FormHelper
 	def method_missing_with_wrapping(symb,*args, &block)
 		method_name = symb.to_s
 		if method_name =~ /^wrapped_(.+)$/
+#
+#	It'd be nice to be able to genericize all of the
+#	wrapped_* methods since they are all basically
+#	the same.
+#		Strip of the "wrapped_"
+#		Label
+#		Call "unwrapped" method
+#
 			content = field_wrapper(args[1]) do
 				send("_#{method_name}",*args) << 
 					(( block_given? )? capture(&block) : '')
