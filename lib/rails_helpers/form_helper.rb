@@ -6,30 +6,30 @@ module RailsHelpers::FormHelper
 		s << "\n</div><!-- class='#{method}' -->"
 	end
 
-	def _wrapped_check_box(object_name,method,options={})
-		s =  label( object_name, method, 
-			options.delete(:label_text) || "#{method.to_s.titleize}?" )
-		s << check_box( object_name, method, options )
-	end
-
-	def _wrapped_collection_select(object_name,method,
-			collection,value_method,text_method,
-			options={},html_options={})
-		s =  label( object_name, method, options.delete(:label_text) )
-		s << collection_select( object_name, method, 
-			collection,value_method,text_method,options,html_options )
-	end
-
-	def _wrapped_grouped_collection_select(object_name,method,
-			collection, group_method, group_label_method,
-			option_key_method, option_value_method,
-			options={},html_options={})
-		s =  label( object_name, method, options.delete(:label_text) )
-		s << grouped_collection_select( object_name, method, 
-			collection, group_method, group_label_method,
-			option_key_method, option_value_method,
-			options, html_options )
-	end
+#	def _wrapped_check_box(object_name,method,options={})
+#		s =  label( object_name, method, 
+#			options.delete(:label_text) || "#{method.to_s.titleize}?" )
+#		s << check_box( object_name, method, options )
+#	end
+#
+#	def _wrapped_collection_select(object_name,method,
+#			collection,value_method,text_method,
+#			options={},html_options={})
+#		s =  label( object_name, method, options.delete(:label_text) )
+#		s << collection_select( object_name, method, 
+#			collection,value_method,text_method,options,html_options )
+#	end
+#
+#	def _wrapped_grouped_collection_select(object_name,method,
+#			collection, group_method, group_label_method,
+#			option_key_method, option_value_method,
+#			options={},html_options={})
+#		s =  label( object_name, method, options.delete(:label_text) )
+#		s << grouped_collection_select( object_name, method, 
+#			collection, group_method, group_label_method,
+#			option_key_method, option_value_method,
+#			options, html_options )
+#	end
 
 	#	This is NOT a form field
 	def _wrapped_spans(object_name,method,options={})
@@ -52,23 +52,23 @@ module RailsHelpers::FormHelper
 	end
 	alias_method :gender_select, :sex_select
 
-	def _wrapped_sex_select(object_name, method, 
-			options={}, html_options={})
-		s =  label( object_name, method, options.delete(:label_text) )
-		s << sex_select( object_name, method, options, html_options )
-	end
-	alias_method :_wrapped_gender_select, :_wrapped_sex_select
-
-	def _wrapped_select(object_name, method, choices, 
-			options={}, html_options={})
-		s =  label( object_name, method, options.delete(:label_text) )
-		s << select( object_name, method, choices, options, html_options )
-	end
-
-	def _wrapped_text_area(object_name,method,options={})
-		s =  label( object_name, method, options.delete(:label_text) )
-		s << text_area( object_name, method, options )
-	end
+#	def _wrapped_sex_select(object_name, method, 
+#			options={}, html_options={})
+#		s =  label( object_name, method, options.delete(:label_text) )
+#		s << sex_select( object_name, method, options, html_options )
+#	end
+#	alias_method :_wrapped_gender_select, :_wrapped_sex_select
+#
+#	def _wrapped_select(object_name, method, choices, 
+#			options={}, html_options={})
+#		s =  label( object_name, method, options.delete(:label_text) )
+#		s << select( object_name, method, choices, options, html_options )
+#	end
+#
+#	def _wrapped_text_area(object_name,method,options={})
+#		s =  label( object_name, method, options.delete(:label_text) )
+#		s << text_area( object_name, method, options )
+#	end
 
 	def date_text_field(object_name,method,options={})
 		format = options.delete(:format) || '%m/%d/%Y'
@@ -87,15 +87,15 @@ module RailsHelpers::FormHelper
 		text_field( object_name, method, options )
 	end
 
-	def _wrapped_date_text_field(object_name,method,options={})
-		s =  label( object_name, method, options.delete(:label_text) )
-		s << date_text_field( object_name, method, options )
-	end
-
-	def _wrapped_text_field(object_name,method,options={})
-		s =  label( object_name, method, options.delete(:label_text) )
-		s << text_field( object_name, method, options )
-	end
+#	def _wrapped_date_text_field(object_name,method,options={})
+#		s =  label( object_name, method, options.delete(:label_text) )
+#		s << date_text_field( object_name, method, options )
+#	end
+#
+#	def _wrapped_text_field(object_name,method,options={})
+#		s =  label( object_name, method, options.delete(:label_text) )
+#		s << text_field( object_name, method, options )
+#	end
 
 	#	This is NOT a form field
 	def _wrapped_yes_or_no_spans(object_name,method,options={})
@@ -112,11 +112,11 @@ module RailsHelpers::FormHelper
 			options, html_options)
 	end
 
-	def _wrapped_y_n_dk_select(object_name, method, 
-			options={}, html_options={})
-		s =  label( object_name, method, options.delete(:label_text) )
-		s << y_n_dk_select( object_name, method, options, html_options )
-	end
+#	def _wrapped_y_n_dk_select(object_name, method, 
+#			options={}, html_options={})
+#		s =  label( object_name, method, options.delete(:label_text) )
+#		s << y_n_dk_select( object_name, method, options, html_options )
+#	end
 
 
 	def self.included(base)
@@ -128,6 +128,7 @@ module RailsHelpers::FormHelper
 	def method_missing_with_wrapping(symb,*args, &block)
 		method_name = symb.to_s
 		if method_name =~ /^wrapped_(.+)$/
+			unwrapped_method_name = $1
 #
 #	It'd be nice to be able to genericize all of the
 #	wrapped_* methods since they are all basically
@@ -136,9 +137,23 @@ module RailsHelpers::FormHelper
 #		Label
 #		Call "unwrapped" method
 #
-			content = field_wrapper(args[1]) do
-				send("_#{method_name}",*args) << 
-					(( block_given? )? capture(&block) : '')
+
+			object_name = args[0]
+			method      = args[1]
+			options     = args.detect{|i| i.is_a?(Hash) }
+			label_text  = options.delete(:label_text) unless options.nil?
+
+			content = field_wrapper(method) do
+				s = if respond_to?(unwrapped_method_name)
+					label( object_name, method, label_text ) <<
+					send("#{unwrapped_method_name}",*args)
+				else
+					send("_#{method_name}",*args)
+				end
+
+				s << (( block_given? )? capture(&block) : '')
+#				send("_#{method_name}",*args) << 
+#					(( block_given? )? capture(&block) : '')
 			end
 			if block_called_from_erb?(block)
 				concat(content)
