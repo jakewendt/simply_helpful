@@ -141,7 +141,8 @@ module RailsHelpers::FormHelper
 			object_name = args[0]
 			method      = args[1]
 			options     = args.detect{|i| i.is_a?(Hash) }
-			label_text  = options.delete(:label_text) unless options.nil?
+#			label_text  = options.delete(:label_text) unless options.nil?
+			label_text  = options[:label_text] unless options.nil?
 
 			content = field_wrapper(method) do
 				s = if respond_to?(unwrapped_method_name)
