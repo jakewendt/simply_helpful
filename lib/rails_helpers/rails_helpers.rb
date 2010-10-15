@@ -86,4 +86,5 @@ module RailsHelpers::RailsHelpers
 	end
 
 end
+require 'action_view'
 ActionView::Base.send(:include, RailsHelpers::RailsHelpers)
