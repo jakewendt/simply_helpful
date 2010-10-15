@@ -14,6 +14,8 @@
  rake gemspec
  rake install
 
+ rake version:bump:patch
+ rake version:bump:minor
  rake version:bump:major
  rake release
 
