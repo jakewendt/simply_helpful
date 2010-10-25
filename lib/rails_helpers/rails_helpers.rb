@@ -35,10 +35,20 @@ module RailsHelpers::RailsHelpers
 		tag('img',options.merge({:src => src, :alt => alt}))
 	end
 
+	def button_link_to( title, url, options={} )
+		classes = ['link']
+		classes << options[:class]
+		s =  "<a href='#{url_for(url)}' style='text-decoration:none;'>"
+		s << "<button type='button'>"
+		s << title
+		s << "</button></a>"
+		s
+	end
+
 	#	This creates a button that looks like a submit button
 	#	but is just a javascript controlled link.
 	#	I don't like it.
-	def button_link_to( title, url, options={} )
+	def old_button_link_to( title, url, options={} )
 #		id = "id='#{options[:id]}'" unless options[:id].blank?
 #		klass = if options[:class].blank?
 #			"class='link'"
