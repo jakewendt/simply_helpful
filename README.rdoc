@@ -1,11 +1,17 @@
 = Rails Helpers
 
 
+== ToDo
+
+* generator to install css and js
+
+
 == Installation / Usage
 
  config.gem 'jakewendt-rails_helpers',
    :lib    => 'rails_helpers',
    :source => 'http://rubygems.org'
+
 
 == Gemified with Jeweler
 
