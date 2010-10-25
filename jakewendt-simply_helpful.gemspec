@@ -16,9 +16,9 @@ Gem::Specification.new do |s|
     "README.rdoc"
   ]
   s.files = [
-    "lib/rails_helpers.rb",
-     "lib/rails_helpers/form_helper.rb",
-     "lib/rails_helpers/rails_helpers.rb"
+    "lib/simply_helpful.rb",
+     "lib/simply_helpful/form_helper.rb",
+     "lib/simply_helpful/rails_helpers.rb"
   ]
   s.homepage = %q{http://github.com/jakewendt/simply_helpful}
   s.rdoc_options = ["--charset=UTF-8"]
