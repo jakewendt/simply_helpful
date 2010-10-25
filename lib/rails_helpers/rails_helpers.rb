@@ -1,11 +1,12 @@
 module RailsHelpers::RailsHelpers
 
 	def form_link_to( title, url, options={}, &block )
+#			"action='#{url}' " <<
 		extra_tags = extra_tags_for_form(options)
 		s =  "\n" <<
 			"<form " <<
 			"class='#{options.delete(:class)||'form_link_to'}' " <<
-			"action='#{url}' " <<
+			"action='#{url_for(url)}' " <<
 			"method='#{options.delete('method')}'>\n" <<
 			extra_tags << "\n"
 		s << (( block_given? )? capture(&block) : '')
