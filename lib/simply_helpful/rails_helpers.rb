@@ -1,4 +1,4 @@
-module RailsHelpers::RailsHelpers
+module SimplyHelpful::RailsHelpers
 
 	def form_link_to( title, url, options={}, &block )
 #			"action='#{url}' " <<
@@ -103,4 +103,4 @@ module RailsHelpers::RailsHelpers
 	end
 
 end
-ActionView::Base.send(:include, RailsHelpers::RailsHelpers)
+ActionView::Base.send(:include, SimplyHelpful::RailsHelpers)

@@ -1,35 +1,10 @@
-module RailsHelpers::FormHelper
+module SimplyHelpful::FormHelper
 
 	def field_wrapper(method,&block)
 		s =  "<div class='#{method} field_wrapper'>\n"
 		s << yield 
 		s << "\n</div><!-- class='#{method}' -->"
 	end
-
-#	def _wrapped_check_box(object_name,method,options={})
-#		s =  label( object_name, method, 
-#			options.delete(:label_text) || "#{method.to_s.titleize}?" )
-#		s << check_box( object_name, method, options )
-#	end
-#
-#	def _wrapped_collection_select(object_name,method,
-#			collection,value_method,text_method,
-#			options={},html_options={})
-#		s =  label( object_name, method, options.delete(:label_text) )
-#		s << collection_select( object_name, method, 
-#			collection,value_method,text_method,options,html_options )
-#	end
-#
-#	def _wrapped_grouped_collection_select(object_name,method,
-#			collection, group_method, group_label_method,
-#			option_key_method, option_value_method,
-#			options={},html_options={})
-#		s =  label( object_name, method, options.delete(:label_text) )
-#		s << grouped_collection_select( object_name, method, 
-#			collection, group_method, group_label_method,
-#			option_key_method, option_value_method,
-#			options, html_options )
-#	end
 
 	#	This is NOT a form field
 	def _wrapped_spans(object_name,method,options={})
@@ -52,24 +27,6 @@ module RailsHelpers::FormHelper
 	end
 	alias_method :gender_select, :sex_select
 
-#	def _wrapped_sex_select(object_name, method, 
-#			options={}, html_options={})
-#		s =  label( object_name, method, options.delete(:label_text) )
-#		s << sex_select( object_name, method, options, html_options )
-#	end
-#	alias_method :_wrapped_gender_select, :_wrapped_sex_select
-#
-#	def _wrapped_select(object_name, method, choices, 
-#			options={}, html_options={})
-#		s =  label( object_name, method, options.delete(:label_text) )
-#		s << select( object_name, method, choices, options, html_options )
-#	end
-#
-#	def _wrapped_text_area(object_name,method,options={})
-#		s =  label( object_name, method, options.delete(:label_text) )
-#		s << text_area( object_name, method, options )
-#	end
-
 	def date_text_field(object_name,method,options={})
 		format = options.delete(:format) || '%m/%d/%Y'
 		tmp_value = if options[:value].blank?
@@ -87,16 +44,6 @@ module RailsHelpers::FormHelper
 		text_field( object_name, method, options )
 	end
 
-#	def _wrapped_date_text_field(object_name,method,options={})
-#		s =  label( object_name, method, options.delete(:label_text) )
-#		s << date_text_field( object_name, method, options )
-#	end
-#
-#	def _wrapped_text_field(object_name,method,options={})
-#		s =  label( object_name, method, options.delete(:label_text) )
-#		s << text_field( object_name, method, options )
-#	end
-
 	#	This is NOT a form field
 	def _wrapped_yes_or_no_spans(object_name,method,options={})
 		object = instance_variable_get("@#{object_name}")
@@ -111,13 +58,6 @@ module RailsHelpers::FormHelper
 			[['Yes',1],['No',2],["Don't Know",999]],
 			options, html_options)
 	end
-
-#	def _wrapped_y_n_dk_select(object_name, method, 
-#			options={}, html_options={})
-#		s =  label( object_name, method, options.delete(:label_text) )
-#		s << y_n_dk_select( object_name, method, options, html_options )
-#	end
-
 
 	def self.included(base)
 		base.class_eval do
@@ -166,7 +106,7 @@ module RailsHelpers::FormHelper
 	end
 
 end
-ActionView::Base.send(:include, RailsHelpers::FormHelper)
+ActionView::Base.send(:include, SimplyHelpful::FormHelper)
 
 
 ActionView::Helpers::FormBuilder.class_eval do

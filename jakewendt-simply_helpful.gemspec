@@ -4,8 +4,8 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{jakewendt-rails_helpers}
-  s.version = "1.7.8"
+  s.name = %q{jakewendt-simply_helpful}
+  s.version = "2.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["George 'Jake' Wendt"]
@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
      "lib/rails_helpers/form_helper.rb",
      "lib/rails_helpers/rails_helpers.rb"
   ]
-  s.homepage = %q{http://github.com/jakewendt/rails_helpers}
+  s.homepage = %q{http://github.com/jakewendt/simply_helpful}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}

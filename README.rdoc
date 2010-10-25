@@ -1,4 +1,4 @@
-= Rails Helpers
+= Simply Helpful
 
 
 == ToDo
@@ -8,8 +8,8 @@
 
 == Installation / Usage
 
- config.gem 'jakewendt-rails_helpers',
-   :lib    => 'rails_helpers',
+ config.gem 'jakewendt-simply_helpful',
+   :lib    => 'simply_helpful',
    :source => 'http://rubygems.org'
 
 
@@ -17,13 +17,14 @@
 
  vi Rakefile
  rake version:write
- rake gemspec
- rake install
 
  rake version:bump:patch
  rake version:bump:minor
  rake version:bump:major
- rake release
 
+ rake gemspec
+
+ rake install
+ rake release
 
 Copyright (c) 2010 [George 'Jake' Wendt], released under the MIT license
