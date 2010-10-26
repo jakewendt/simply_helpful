@@ -8,9 +8,13 @@
 
 == Installation / Usage
 
- config.gem 'jakewendt-simply_helpful',
-   :lib    => 'simply_helpful',
-   :source => 'http://rubygems.org'
+ config/environment.rb ...
+   config.gem 'jakewendt-simply_helpful',
+     :lib    => 'simply_helpful',
+     :source => 'http://rubygems.org'
+
+ Rakefile ...
+   require 'simply_helpful/tasks'
 
 
 == Gemified with Jeweler
