@@ -1,6 +1,20 @@
+require(File.join(File.dirname(__FILE__), 'config', 'boot'))
+
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
+
+desc 'Generate documentation for the gem.'
+Rake::RDocTask.new(:rdoc) do |rdoc|
+	rdoc.rdoc_dir = 'rdoc'
+	rdoc.title		= 'Simply Helpful'
+	rdoc.options << '--line-numbers' << '--inline-source'
+	rdoc.rdoc_files.include('README.rdoc')
+	rdoc.rdoc_files.include('lib/**/*.rb')
+end
+
+require 'tasks/rails'
+
 
 begin
 	require 'jeweler'
