@@ -3,7 +3,7 @@
 
 == ToDo
 
-* generator to install css and js
+* generator to install css and js and rake tasks and ...
 
 
 == Installation / Usage
@@ -30,5 +30,6 @@
 
  rake install
  rake release
+
 
 Copyright (c) 2010 [George 'Jake' Wendt], released under the MIT license
