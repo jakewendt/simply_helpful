@@ -14,7 +14,7 @@ Rails::Initializer.run do |config|
 	#	The {{key}} interpolation syntax in I18n 
 	#	messages is deprecated. Please use %{key} instead.
 	#	This must be called early, or someone else will load a newer version.
-	config.gem "i18n", :version => '=0.3.7'
+#	config.gem "i18n", :version => '=0.3.7'
 
 	config.gem "jakewendt-calnet_authenticated",
 		:lib => "calnet_authenticated"
@@ -22,14 +22,14 @@ Rails::Initializer.run do |config|
 	config.gem "jakewendt-simply_authorized",
 		:lib => "simply_authorized"
 
-	config.gem "jakewendt-simply_helpful",
-		:lib => "simply_helpful"
+#	config.gem "jakewendt-simply_helpful",
+#		:lib => "simply_helpful"
 
 	config.plugin_paths = [
 		File.expand_path(File.join(File.dirname(__FILE__),'../..')),
 		File.expand_path(File.join(File.dirname(__FILE__),'../../..','peter'))
 	]
-	config.plugins = [ :simply_photos, :html_test, :html_test_extension ]
+	config.plugins = [ :simply_helpful, :html_test, :html_test_extension ]
 
 	config.frameworks -= [:active_resource]
 
