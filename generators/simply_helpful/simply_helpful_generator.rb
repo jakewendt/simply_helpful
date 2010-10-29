@@ -6,6 +6,20 @@ class SimplyHelpfulGenerator < Rails::Generator::Base
 		#	for code methods for record (Manifest)
 		record do |m|
 
+			File.open('Rakefile','a'){|f| 
+				f.puts <<-EOF
+#	From `script/generate simply_helpful` ...
+require 'simply_helpful/test_tasks'
+				EOF
+			}
+
+			File.open('.autotest','a'){|f| 
+				f.puts <<-EOF
+#	From `script/generate simply_helpful` ...
+require 'simply_helpful/autotest'
+				EOF
+			}
+
 #			%w( ).each do |migration|
 #				m.migration_template "migrations/#{migration}.rb",
 #					'db/migrate', :migration_file_name => migration
@@ -29,16 +43,16 @@ class SimplyHelpfulGenerator < Rails::Generator::Base
 #					"public/images/#{style}/missing.png")
 #			end
 
-			m.directory('test/functional/helpful')
-			Dir["#{dot}/templates/functional/*rb"].each{|file| 
-				f = file.split('/').slice(-2,2).join('/')
-				m.file(f, "test/functional/helpful/#{File.basename(file)}")
-			}
-			m.directory('test/unit/helpful')
-			Dir["#{dot}/templates/unit/*rb"].each{|file| 
-				f = file.split('/').slice(-2,2).join('/')
-				m.file(f, "test/unit/helpful/#{File.basename(file)}")
-			}
+#			m.directory('test/functional/helpful')
+#			Dir["#{dot}/templates/functional/*rb"].each{|file| 
+#				f = file.split('/').slice(-2,2).join('/')
+#				m.file(f, "test/functional/helpful/#{File.basename(file)}")
+#			}
+#			m.directory('test/unit/helpful')
+#			Dir["#{dot}/templates/unit/*rb"].each{|file| 
+#				f = file.split('/').slice(-2,2).join('/')
+#				m.file(f, "test/unit/helpful/#{File.basename(file)}")
+#			}
 		end
 	end
 
