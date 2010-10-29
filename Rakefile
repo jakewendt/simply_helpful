@@ -15,7 +15,6 @@ end
 
 require 'tasks/rails'
 
-
 begin
 	require 'jeweler'
 	Jeweler::Tasks.new do |gem|
@@ -35,7 +34,13 @@ begin
 		gem.files += FileList['generators/**/*']
 		gem.files -= FileList['**/versions/*']
 
-		gem.test_files = []
+#   
+#		I'm not quite sure if it matters whether these files
+#		are included as 'files' or 'test_files', but
+#		they need to be included if I'm gonna use'em.
+#
+		gem.test_files = FileList['test/**/*.rb']
+
 		gem.add_dependency('rails', '~> 2')
 	end
 	Jeweler::GemcutterTasks.new
