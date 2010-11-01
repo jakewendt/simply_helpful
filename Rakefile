@@ -39,7 +39,8 @@ begin
 #		are included as 'files' or 'test_files', but
 #		they need to be included if I'm gonna use'em.
 #
-		gem.test_files = FileList['test/**/*.rb']
+		gem.test_files  = FileList['test/**/*.rb']
+		gem.test_files -= FileList['test/test_helper.rb']
 
 		gem.add_dependency('rails', '~> 2')
 	end
