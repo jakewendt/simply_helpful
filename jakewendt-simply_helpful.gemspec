@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{jakewendt-simply_helpful}
-  s.version = "2.0.5"
+  s.version = "2.0.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["George 'Jake' Wendt"]
-  s.date = %q{2010-10-29}
+  s.date = %q{2010-11-05}
   s.description = %q{longer description of your gem}
   s.email = %q{github@jake.otherinbox.com}
   s.extra_rdoc_files = [
@@ -19,7 +19,9 @@ Gem::Specification.new do |s|
     "config/routes.rb",
      "generators/simply_helpful/USAGE",
      "generators/simply_helpful/simply_helpful_generator.rb",
+     "generators/simply_helpful/templates/autotest_simply_helpful.rb",
      "generators/simply_helpful/templates/javascripts/simply_helpful.js",
+     "generators/simply_helpful/templates/simply_helpful.rake",
      "lib/simply_helpful.rb",
      "lib/simply_helpful/autotest.rb",
      "lib/simply_helpful/form_helper.rb",
@@ -38,8 +40,7 @@ Gem::Specification.new do |s|
     "test/app/controllers/application_controller.rb",
      "test/app/controllers/home_controller.rb",
      "test/app/models/user.rb",
-     "test/config/routes.rb",
-     "test/test_helper.rb"
+     "test/config/routes.rb"
   ]
 
   if s.respond_to? :specification_version then
