@@ -5,20 +5,24 @@ class SimplyHelpfulGenerator < Rails::Generator::Base
 		#	rails-2.3.10/lib/rails_generator/commands.rb
 		#	for code methods for record (Manifest)
 		record do |m|
+			m.directory('config/autotest')
+			m.file('autotest_simply_helpful.rb', 'config/autotest/simply_helpful.rb')
+			m.directory('lib/tasks')
+			m.file('simply_helpful.rake', 'lib/tasks/simply_helpful.rake')
 
-			File.open('Rakefile','a'){|f| 
-				f.puts <<-EOF
-#	From `script/generate simply_helpful` ...
-require 'simply_helpful/test_tasks'
-				EOF
-			}
-
-			File.open('.autotest','a'){|f| 
-				f.puts <<-EOF
-#	From `script/generate simply_helpful` ...
-require 'simply_helpful/autotest'
-				EOF
-			}
+#			File.open('Rakefile','a'){|f| 
+#				f.puts <<-EOF
+##	From `script/generate simply_helpful` ...
+#require 'simply_helpful/test_tasks'
+#				EOF
+#			}
+#
+#			File.open('.autotest','a'){|f| 
+#				f.puts <<-EOF
+##	From `script/generate simply_helpful` ...
+#require 'simply_helpful/autotest'
+#				EOF
+#			}
 
 #			%w( ).each do |migration|
 #				m.migration_template "migrations/#{migration}.rb",
