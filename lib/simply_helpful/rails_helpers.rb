@@ -42,8 +42,7 @@ module SimplyHelpful::RailsHelpers
 		s =  "<a href='#{url_for(url)}' style='text-decoration:none;'>"
 		s << "<button type='button'>"
 		s << title
-		s << "</button></a>"
-		s
+		s << "</button></a>\n"
 	end
 
 	#	This creates a button that looks like a submit button
@@ -74,11 +73,9 @@ module SimplyHelpful::RailsHelpers
 			s << content_tag( :p, msg, :id => key, :class => 'flash' )
 			s << "\n"
 		end
-		s << "<noscript>\n"
-		s << "<p id='noscript' class='flash'>"
-		s << "Javascript is required for this site to be fully functional."
-		s << "</p>\n"
-		s << "</noscript>\n"
+		s << "<noscript><p id='noscript' class='flash'>\n"
+		s << "Javascript is required for this site to be fully functional.\n"
+		s << "</p></noscript>\n"
 	end
 
 	#	Created to stop multiple entries of same stylesheet
