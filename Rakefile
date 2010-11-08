@@ -29,7 +29,7 @@ begin
 #		gem.files  = FileList['config/routes.rb']
 #		gem.files += FileList['app/**/*.rb']
 #		gem.files += FileList['app/**/*.erb']
-		gem.files += FileList['lib/**/*.rb']
+		gem.files  = FileList['lib/**/*.rb']
 		gem.files += FileList['lib/**/*.rake']
 		gem.files += FileList['generators/**/*']
 		gem.files -= FileList['**/versions/*']
