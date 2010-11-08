@@ -3,9 +3,6 @@
 
 == ToDo
 
-* generator to install css and js and rake tasks and ...
-
-
 == Installation / Usage
 
  config/environment.rb ...
@@ -13,9 +10,7 @@
      :lib    => 'simply_helpful',
      :source => 'http://rubygems.org'
 
- Rakefile ...
-   require 'simply_helpful/tasks'
-
+ script/generate simply_helpful
 
 == Gemified with Jeweler
 
