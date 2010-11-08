@@ -75,8 +75,9 @@ class SimplyHelpful::RailsHelpersTest < ActionView::TestCase
 		response = HTML::Document.new(
 			aws_image_tag('myimage')
 		).root
+		bucket = ( defined?(RAILS_APP_NAME) && RAILS_APP_NAME ) || 'ccls'
 #<img alt="myimage" src="http://s3.amazonaws.com/ccls/images/myimage" />
-		assert_select response, 'img[src=http://s3.amazonaws.com/ccls/images/myimage]', 1
+		assert_select response, "img[src=http://s3.amazonaws.com/#{bucket}/images/myimage]", 1
 	end
 
 	test "flasher" do
