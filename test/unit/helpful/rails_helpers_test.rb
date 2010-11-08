@@ -3,6 +3,10 @@ require 'test_helper'
 
 class SimplyHelpful::RailsHelpersTest < ActionView::TestCase
 
+	def flash
+		{:notice => "Hello There"}
+	end
+
 	test "form_link_to with block" do
 		response = HTML::Document.new(
 			form_link_to('mytitle','/myurl') do
@@ -69,11 +73,17 @@ class SimplyHelpful::RailsHelpersTest < ActionView::TestCase
 	end
 
 	test "flasher" do
-#		response = HTML::Document.new(
-#			flasher
-#		).root
-#puts response
-#pending
+		response = HTML::Document.new(
+			flasher
+		).root
+#<p class="flash" id="notice">Hello There</p>
+#<noscript>
+#<p id="noscript" class="flash">Javascript is required for this site to be fully functional.</p>
+#</noscript>
+		assert_select response, 'p#notice.flash'
+		assert_select response, 'noscript' do
+			assert_select 'p#noscript.flash'
+		end
 	end
 
 	test "javascripts" do
