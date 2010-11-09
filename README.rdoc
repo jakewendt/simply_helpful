@@ -5,10 +5,9 @@
 
 == Installation / Usage
 
- config/environment.rb ...
-   config.gem 'jakewendt-simply_helpful',
-     :lib    => 'simply_helpful',
-     :source => 'http://rubygems.org'
+ config.gem 'jakewendt-simply_helpful',
+   :lib    => 'simply_helpful',
+   :source => 'http://rubygems.org'
 
  script/generate simply_helpful
 
