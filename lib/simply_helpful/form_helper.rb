@@ -19,6 +19,12 @@ module SimplyHelpful::FormHelper
 		s << "<span class='value'>#{value}</span>"
 	end
 
+	def _wrapped_date_spans(object_name,method,options={})
+		object = instance_variable_get("@#{object_name}")
+		_wrapped_spans(object_name,method,options.update(
+			:value => mdy(object.send(method)) ) )
+	end
+
 	def sex_select(object_name, method, 
 			options={}, html_options={})
 		select(object_name, method,
@@ -41,6 +47,7 @@ module SimplyHelpful::FormHelper
 		rescue NoMethodError
 			options[:value] = tmp_value
 		end
+		options.update(:class => [options[:class],'datepicker'].compact.join(' '))
 		text_field( object_name, method, options )
 	end
 
