@@ -111,8 +111,13 @@ module SimplyHelpful::FormHelper
 				s = if respond_to?(unwrapped_method_name)
 					options    = args.detect{|i| i.is_a?(Hash) }
 					label_text = options.delete(:label_text) unless options.nil?
-					label( object_name, method, label_text ) <<
-					send("#{unwrapped_method_name}",*args)
+					if unwrapped_method_name == 'check_box'
+						send("#{unwrapped_method_name}",*args) <<
+						label( object_name, method, label_text )
+					else
+						label( object_name, method, label_text ) <<
+						send("#{unwrapped_method_name}",*args)
+					end
 				else
 					send("_#{method_name}",*args)
 				end
