@@ -82,7 +82,7 @@ module SimplyHelpful::FormHelper
 			options={}, html_options={})
 		select(object_name, method,
 			[['Yes',1],['No',2],["Don't Know",999]],
-			options, html_options)
+			{:include_blank => true}.merge(options), html_options)
 	end
 
 	def self.included(base)
