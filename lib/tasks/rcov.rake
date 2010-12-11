@@ -10,7 +10,7 @@ namespace :test do
 		
 		unless PLATFORM['i386-mswin32']
 			rcov = "rcov --sort coverage --rails --aggregate coverage.data " <<
-							"--text-summary -Ilib -T " <<
+							"--text-summary -Ilib:test -T " <<
 							"-x gems/*,db/migrate/*,jrails/*/*" <<
 							',\(eval\),\(recognize_optimized\),\(erb\)' <<    # needed in jruby
 							",yaml,yaml/*,lib/tmail/parser.y,jruby.jar!/*" << # needed in jruby
