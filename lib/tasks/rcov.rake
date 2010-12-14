@@ -10,12 +10,17 @@ namespace :test do
 		
 		unless PLATFORM['i386-mswin32']
 			rcov = "rcov --sort coverage --rails --aggregate coverage.data " <<
-							"--text-summary -Ilib:test -T " <<
-							"-x gems/*,db/migrate/*,jrails/*/*" <<
-							',\(eval\),\(recognize_optimized\),\(erb\)' <<    # needed in jruby
-							",yaml,yaml/*,lib/tmail/parser.y,jruby.jar!/*" << # needed in jruby
-							",html_test/*/*" <<
-							",html_test_extension/*/*"
+							"--text-summary -Ilib:test -T "
+			exclusions = ['gems/*','db/*schema.rb','db/migrate/*']
+			exclusions += RCOV_EXCLUDES if defined?(RCOV_EXCLUDES)
+			puts "Excluding : #{exclusions.join(',')}"
+			rcov << "-x #{exclusions.join(',')}"
+#							"-x gems/*,db/migrate/*,jrails/*/*"
+#							',\(eval\),\(recognize_optimized\),\(erb\)' <<    # needed in jruby
+#							",yaml,yaml/*,lib/tmail/parser.y,jruby.jar!/*" << # needed in jruby
+#							",db/*schema.rb"
+#							",html_test/*/*" <<
+#							",html_test_extension/*/*"
 		else
 			rcov = "rcov.cmd --sort coverage --rails --aggregate " <<
 							"coverage.data --text-summary -Ilib -T"
