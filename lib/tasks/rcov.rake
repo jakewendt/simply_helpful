@@ -11,7 +11,10 @@ namespace :test do
 		unless PLATFORM['i386-mswin32']
 			rcov = "rcov --sort coverage --rails --aggregate coverage.data " <<
 							"--text-summary -Ilib:test -T "
-			exclusions = ['gems/*','db/*schema.rb','db/migrate/*']
+#	exclusions are ...
+#    -x, --exclude PATTERNS           Don't generate info for files matching a
+#                                     pattern (comma-separated regexp list)
+			exclusions = ['gems/','db/.*schema.rb','db/migrate']
 			exclusions += RCOV_EXCLUDES if defined?(RCOV_EXCLUDES)
 			puts "Excluding : #{exclusions.join(',')}"
 			rcov << "-x #{exclusions.join(',')}"
