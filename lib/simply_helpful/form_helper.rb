@@ -12,6 +12,7 @@ module SimplyHelpful::FormHelper
 			else '&nbsp;'
 		end
 	end
+	alias_method :yndk, :y_n_dk
 
 	def field_wrapper(method,&block)
 		s =  "<div class='#{method} field_wrapper'>\n"
@@ -37,6 +38,7 @@ module SimplyHelpful::FormHelper
 		_wrapped_spans(object_name,method,options.update(
 			:value => y_n_dk(object.send(method)) ) )
 	end
+	alias_method :_wrapped_yndk_spans, :_wrapped_y_n_dk_spans
 
 	def _wrapped_date_spans(object_name,method,options={})
 		object = instance_variable_get("@#{object_name}")
@@ -84,10 +86,12 @@ module SimplyHelpful::FormHelper
 			[['Yes',1],['No',2],["Don't Know",999]],
 			{:include_blank => true}.merge(options), html_options)
 	end
+	alias_method :yndk_select, :y_n_dk_select
 
 	def self.included(base)
 		base.class_eval do
-			alias_method_chain :method_missing, :wrapping
+			alias_method_chain( :method_missing, :wrapping 
+				) unless base.respond_to?(:method_missing_without_wrapping)
 		end
 	end
 
@@ -161,6 +165,7 @@ ActionView::Helpers::FormBuilder.class_eval do
 				objectify_options(options),
 				html_options)
 	end
+	alias_method :yndk_select, :y_n_dk_select
 
 	def method_missing_with_wrapping(symb,*args, &block)
 		method_name = symb.to_s
@@ -177,6 +182,7 @@ ActionView::Helpers::FormBuilder.class_eval do
 		end
 	end
 
-	alias_method_chain :method_missing, :wrapping
+	alias_method_chain( :method_missing, :wrapping
+		) unless respond_to?(:method_missing_without_wrapping)
 
 end

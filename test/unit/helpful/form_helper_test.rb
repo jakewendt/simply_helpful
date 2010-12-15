@@ -97,6 +97,23 @@ class SimplyHelpful::FormHelperTest < ActionView::TestCase
 		end
 	end
 
+	test "wrapped_gender_select" do
+		@user = SimplyHelpful::User.new
+		response = HTML::Document.new(
+			wrapped_gender_select(:user, :sex)).root
+#<div class="sex field_wrapper">
+#<label for="user_sex">Sex</label><select id="user_sex" name="user[sex]"><option value="M">male</option>
+#<option value="F">female</option></select>
+#</div><!-- class='sex' -->
+		assert_select response, 'div.sex.field_wrapper', 1 do
+			assert_select 'label[for=user_sex]','Sex',1 
+			assert_select "select#user_sex[name='user[sex]']" do
+				assert_select 'option[value=M]', 'male'
+				assert_select 'option[value=F]', 'female'
+			end
+		end
+	end
+
 	test "wrapped_date_text_field" do
 		@user = SimplyHelpful::User.new
 		response = HTML::Document.new(
@@ -114,6 +131,25 @@ class SimplyHelpful::FormHelperTest < ActionView::TestCase
 		@user = SimplyHelpful::User.new
 		response = HTML::Document.new(
 			wrapped_y_n_dk_select(:user, :yndk)).root
+#<div class="yndk field_wrapper">
+#<label for="user_yndk">Yndk</label><select id="user_yndk" name="user[yndk]"><option value="1">Yes</option>
+#<option value="2">No</option>
+#<option value="999">Don't Know</option></select>
+#</div><!-- class='yndk' -->
+		assert_select response, 'div.yndk.field_wrapper', 1 do
+			assert_select 'label[for=user_yndk]','Yndk',1 
+			assert_select "select#user_yndk[name='user[yndk]']" do
+				assert_select 'option[value=1]', 'Yes'
+				assert_select 'option[value=2]', 'No'
+				assert_select 'option[value=999]', "Don't Know"
+			end
+		end
+	end
+
+	test "wrapped_yndk_select" do
+		@user = SimplyHelpful::User.new
+		response = HTML::Document.new(
+			wrapped_yndk_select(:user, :yndk)).root
 #<div class="yndk field_wrapper">
 #<label for="user_yndk">Yndk</label><select id="user_yndk" name="user[yndk]"><option value="1">Yes</option>
 #<option value="2">No</option>
