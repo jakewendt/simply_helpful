@@ -8,8 +8,8 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
 
-	config.gem "jakewendt-simply_testable",
-		:lib => "simply_testable"
+	config.gem "jakewendt-simply_testable"	#,
+#		:lib => "simply_testable"
 
 	config.plugin_paths = [
 		File.expand_path(File.join(File.dirname(__FILE__),'../..')),

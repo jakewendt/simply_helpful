@@ -1,1 +1,1 @@
-require 'simply_helpful'
+require 'jakewendt-simply_helpful'
