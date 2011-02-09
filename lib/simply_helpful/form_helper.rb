@@ -76,7 +76,7 @@ module SimplyHelpful::FormHelper
 	def _wrapped_yes_or_no_spans(object_name,method,options={})
 		object = instance_variable_get("@#{object_name}")
 		s =  "<span class='label'>#{options[:label_text]||method}</span>\n"
-		value = (object.send("#{method}?"))?'yes':'no'
+		value = (object.send("#{method}?"))?'Yes':'No'
 		s << "<span class='value'>#{value}</span>"
 	end
 

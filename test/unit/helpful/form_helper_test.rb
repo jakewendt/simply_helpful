@@ -48,7 +48,7 @@ class SimplyHelpful::FormHelperTest < ActionView::TestCase
 #</div><!-- class='yes_or_no' -->
 		assert_select response, 'div.yes_or_no.field_wrapper' do
 			assert_select 'span.label','yes_or_no',1
-			assert_select 'span.value','no',1
+			assert_select 'span.value','No',1
 		end
 	end
 
@@ -62,7 +62,7 @@ class SimplyHelpful::FormHelperTest < ActionView::TestCase
 #</div><!-- class='yes_or_no' -->
 		assert_select response, 'div.yes_or_no.field_wrapper' do
 			assert_select 'span.label','yes_or_no',1
-			assert_select 'span.value','yes',1
+			assert_select 'span.value','Yes',1
 		end
 	end
 
@@ -76,7 +76,7 @@ class SimplyHelpful::FormHelperTest < ActionView::TestCase
 #</div><!-- class='yes_or_no' -->
 		assert_select response, 'div.yes_or_no.field_wrapper' do
 			assert_select 'span.label','yes_or_no',1
-			assert_select 'span.value','no',1
+			assert_select 'span.value','No',1
 		end
 	end
 
