@@ -49,7 +49,7 @@ Rails::Initializer.run do |config|
 		config.gem 'jdbc-sqlite3', :lib => 'jdbc/sqlite3'
 		config.gem 'jruby-openssl', :lib => 'openssl'
 	else
-		config.gem "sqlite3-ruby", :lib => "sqlite3"
+		config.gem 'sqlite3'
 	end
 	
 end
