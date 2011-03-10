@@ -36,6 +36,11 @@ module SimplyHelpful::RailsHelpers
 		tag('img',options.merge({:src => src, :alt => alt}))
 	end
 
+	#	This style somehow for some reason actually submits the request TWICE?
+	#	In many cases, this is no big deal, but when using it to send
+	#	emails or something, the controller/action is called twice
+	#	resulting in 2 emails (if that's what your action does)
+	#	I'd really like to understand why.
 	def button_link_to( title, url, options={} )
 		classes = ['link']
 		classes << options[:class]
