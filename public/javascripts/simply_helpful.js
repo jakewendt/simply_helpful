@@ -24,6 +24,8 @@ jQuery(function(){
 		jQuery('.datepicker').datepicker();
 	}
 
+	jQuery('form a.submit.button').siblings('input[type=submit]').hide();
+
 	jQuery('form a.submit.button').click(function(){
 		jQuery(this).parents('form').submit();
 		return false;
