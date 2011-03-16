@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{jakewendt-simply_helpful}
-  s.version = "2.2.1"
+  s.version = "2.2.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["George 'Jake' Wendt"]
-  s.date = %q{2011-03-02}
+  s.date = %q{2011-03-16}
   s.description = %q{longer description of your gem}
   s.email = %q{github@jake.otherinbox.com}
   s.extra_rdoc_files = [
@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
     "generators/simply_helpful/templates/autotest_simply_helpful.rb",
     "generators/simply_helpful/templates/javascripts/simply_helpful.js",
     "generators/simply_helpful/templates/simply_helpful.rake",
+    "generators/simply_helpful/templates/stylesheets/simply_helpful.css",
     "lib/jakewendt-simply_helpful.rb",
     "lib/simply_helpful.rb",
     "lib/simply_helpful/autotest.rb",
@@ -33,7 +34,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = %q{http://github.com/jakewendt/simply_helpful}
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.0}
+  s.rubygems_version = %q{1.5.3}
   s.summary = %q{one-line summary of your gem}
   s.test_files = [
     "test/app/controllers/application_controller.rb",
