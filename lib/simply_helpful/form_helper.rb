@@ -1,7 +1,7 @@
 module SimplyHelpful::FormHelper
 
 	def mdy(date)
-		( date.nil? )?'&nbsp;':date.strftime("%m/%d/%Y")
+		( date.nil? ) ? '&nbsp;' : date.strftime("%m/%d/%Y")
 	end
 
 	def y_n_dk(value)

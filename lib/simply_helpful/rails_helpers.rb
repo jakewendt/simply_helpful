@@ -1,5 +1,18 @@
 module SimplyHelpful::RailsHelpers
 
+	#	Just add the classes 'submit' and 'button'
+	#	for styling and function
+	def submit_link_to(*args,&block)
+		html_options = if block_given?
+			args[1] ||= {}
+		else
+			args[2] ||= {}
+		end
+		( html_options[:class] ||= '' ) << ' submit button'
+		link_to( *args, &block )
+	end
+
+
 	def form_link_to( title, url, options={}, &block )
 #			"action='#{url}' " <<
 		extra_tags = extra_tags_for_form(options)
