@@ -13,6 +13,11 @@
 	border: 2px solid #F44;
 	background-color: #FCC;
 }
+.flash.warn,
+.flash#warn {
+	border: 2px solid #FF6600;
+	background-color: #FFCC99;
+}
 .flash.notice,
 .flash#notice {
 	border: 2px solid #4F4;
