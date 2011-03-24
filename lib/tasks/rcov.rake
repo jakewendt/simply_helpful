@@ -30,6 +30,9 @@ namespace :test do
 		end
 		
 		dirs = Dir.glob("test/**/*_test.rb").collect{|f|File.dirname(f)}.uniq
+		if defined?(@gem_test_dirs) && @gem_test_dirs.is_a?(Array)
+			dirs += @gem_test_dirs
+		end
 		lastdir = dirs.pop
 		dirs.each do |dir|
 			system("#{rcov} --no-html #{dir}/*_test.rb")
