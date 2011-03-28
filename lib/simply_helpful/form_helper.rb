@@ -65,7 +65,7 @@ module SimplyHelpful::FormHelper
 		end
 		begin
 			options[:value] = tmp_value.to_date.try(:strftime,format)
-		rescue NoMethodError
+		rescue NoMethodError, ArgumentError
 			options[:value] = tmp_value
 		end
 		options.update(:class => [options[:class],'datepicker'].compact.join(' '))

@@ -127,6 +127,30 @@ class SimplyHelpful::FormHelperTest < ActionView::TestCase
 		end
 	end
 
+	test "wrapped_date_text_field with invalid dob" do
+		@user = SimplyHelpful::User.new
+		@user.dob = "07181989"	
+#	will raise ...
+#ArgumentError: invalid date
+#    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/date.rb:752:in `new'
+#    lib/simply_helpful/form_helper.rb:67:in `date_text_field'
+#    lib/simply_helpful/form_helper.rb:123:in `send'
+#    lib/simply_helpful/form_helper.rb:123:in `method_missing'
+#    lib/simply_helpful/form_helper.rb:19:in `field_wrapper'
+#    lib/simply_helpful/form_helper.rb:114:in `method_missing'
+#    /test/unit/helpful/form_helper_test.rb:134:in `test_wrapped_date_text_field_with_invalid_dob'
+#
+		response = HTML::Document.new(
+			wrapped_date_text_field(:user,:dob, :object => @user)).root
+#<div class="dob field_wrapper">
+#<label for="user_dob">Dob</label><input id="user_dob" name="user[dob]" size="30" type="text" />
+#</div><!-- class='dob' -->
+		assert_select response, 'div.dob.field_wrapper', 1 do
+			assert_select 'label[for=user_dob]','Dob', 1 
+			assert_select "input#user_dob[name='user[dob]']"
+		end
+	end
+
 	test "wrapped_y_n_dk_select" do
 		@user = SimplyHelpful::User.new
 		response = HTML::Document.new(
