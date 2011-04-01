@@ -88,6 +88,28 @@ module SimplyHelpful::FormHelper
 	end
 	alias_method :yndk_select, :y_n_dk_select
 
+	def hour_select(object_name, method, 
+			options={}, html_options={})
+		select(object_name, method,
+			(1..12),
+			{:include_blank => 'Hour'}.merge(options), html_options)
+	end
+
+	def minute_select(object_name, method, 
+			options={}, html_options={})
+		minutes = (0..59).to_a.collect{|m|[sprintf("%02d",m),m]}
+		select(object_name, method,
+			minutes,
+			{:include_blank => 'Minute'}.merge(options), html_options)
+	end
+
+	def meridiem_select(object_name, method, 
+			options={}, html_options={})
+		select(object_name, method,
+			['AM','PM'], 
+			{:include_blank => 'Meridiem'}.merge(options), html_options)
+	end
+
 	def self.included(base)
 		base.class_eval do
 			alias_method_chain( :method_missing, :wrapping 
@@ -144,7 +166,29 @@ end
 ActionView::Base.send(:include, SimplyHelpful::FormHelper)
 
 
+
 ActionView::Helpers::FormBuilder.class_eval do
+
+	def hour_select(method,options={},html_options={})
+		@template.hour_select(
+			@object_name, method, 
+				objectify_options(options),
+				html_options)
+	end
+
+	def minute_select(method,options={},html_options={})
+		@template.minute_select(
+			@object_name, method, 
+				objectify_options(options),
+				html_options)
+	end
+
+	def meridiem_select(method,options={},html_options={})
+		@template.meridiem_select(
+			@object_name, method, 
+				objectify_options(options),
+				html_options)
+	end
 
 	def sex_select(method,options={},html_options={})
 		@template.sex_select(
