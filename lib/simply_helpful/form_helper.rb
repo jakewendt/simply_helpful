@@ -169,6 +169,13 @@ ActionView::Base.send(:include, SimplyHelpful::FormHelper)
 
 ActionView::Helpers::FormBuilder.class_eval do
 
+	def submit_link_to(value=nil,options={})
+		s = @template.submit_link_to(value,nil,options
+			) << submit(value,options.reverse_merge(
+				:id => "#{object_name}_submit_#{value.try(:downcase).try(:gsub,/\s+/,'_')}"
+			) )
+	end 
+
 	def hour_select(method,options={},html_options={})
 		@template.hour_select(
 			@object_name, method, 
