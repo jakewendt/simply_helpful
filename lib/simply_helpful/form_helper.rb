@@ -14,10 +14,11 @@ module SimplyHelpful::FormHelper
 	end
 	alias_method :yndk, :y_n_dk
 
-	def field_wrapper(method,&block)
-		s =  "<div class='#{method} field_wrapper'>\n"
+	def field_wrapper(method,options={},&block)
+		classes = [method,options[:class]].compact.join(' ')
+		s =  "<div class='#{classes} field_wrapper'>\n"
 		s << yield 
-		s << "\n</div><!-- class='#{method}' -->"
+		s << "\n</div><!-- class='#{classes}' -->"
 	end
 
 	#	This is NOT a form field
@@ -56,7 +57,7 @@ module SimplyHelpful::FormHelper
 
 	def date_text_field(object_name,method,options={})
 		format = options.delete(:format) || '%m/%d/%Y'
-		tmp_value = if options[:value].blank?
+		tmp_value = if options[:value].blank? #and !options[:object].nil?
 			object = options[:object]
 			tmp = object.send("#{method}") ||
 			      object.send("#{method}_before_type_cast")
@@ -133,7 +134,7 @@ module SimplyHelpful::FormHelper
 			object_name = args[0]
 			method      = args[1]
 
-			content = field_wrapper(method) do
+			content = field_wrapper(method,:class => unwrapped_method_name) do
 				s = if respond_to?(unwrapped_method_name)
 					options    = args.detect{|i| i.is_a?(Hash) }
 					label_text = options.delete(:label_text) unless options.nil?
