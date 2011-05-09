@@ -4,6 +4,10 @@ module SimplyHelpful::FormHelper
 		( date.nil? ) ? '&nbsp;' : date.strftime("%m/%d/%Y")
 	end
 
+	def time_mdy(time)
+		( time.nil? ) ? '&nbsp;' : time.strftime("%I:%M %p %m/%d/%Y")
+	end
+
 	def y_n_dk(value)
 		case value
 			when 1   then 'Yes'

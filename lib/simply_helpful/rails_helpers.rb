@@ -8,6 +8,8 @@ module SimplyHelpful::RailsHelpers
 		else
 			args[2] ||= {}
 		end
+		html_options.delete(:value)   #	possible key meant for submit button
+		html_options.delete('value')  #	possible key meant for submit button
 		( html_options[:class] ||= '' ) << ' submit button'
 		link_to( *args, &block )
 	end
