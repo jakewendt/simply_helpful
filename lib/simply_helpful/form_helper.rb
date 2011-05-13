@@ -182,7 +182,10 @@ ActionView::Helpers::FormBuilder.class_eval do
 #				:id => "#{object_name}_submit_#{value.try(:downcase).try(:gsub,/\s+/,'_')}"
 #			) ) << @template.submit_link_to(value,nil,options)
 		s1 = submit(value,options.reverse_merge(
-				:id => "#{object_name}_submit_#{value.try(:downcase).try(:gsub,/\s+/,'_')}"
+				:id => "#{object_name}_submit_#{value.try(:downcase).try(
+					:gsub,/\s+/,'_').try(
+					:gsub,/(&amp;|'|\/)/,'').try(
+					:gsub,/_+/,'_')}"
 			) ) 
 		s2 = @template.submit_link_to(value,nil,options)
 		s2 << s1
