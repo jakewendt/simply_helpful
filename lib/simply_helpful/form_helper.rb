@@ -175,10 +175,17 @@ ActionView::Base.send(:include, SimplyHelpful::FormHelper)
 ActionView::Helpers::FormBuilder.class_eval do
 
 	def submit_link_to(value=nil,options={})
-		s = @template.submit_link_to(value,nil,options
-			) << submit(value,options.reverse_merge(
+		#	submit_link_to will remove :value, which is intended for submit
+		#	so it MUST be executed first.  Unfortunately, my javascript
+		#	expects it to be AFTER the a tag.
+#		s = submit(value,options.reverse_merge(
+#				:id => "#{object_name}_submit_#{value.try(:downcase).try(:gsub,/\s+/,'_')}"
+#			) ) << @template.submit_link_to(value,nil,options)
+		s1 = submit(value,options.reverse_merge(
 				:id => "#{object_name}_submit_#{value.try(:downcase).try(:gsub,/\s+/,'_')}"
-			) )
+			) ) 
+		s2 = @template.submit_link_to(value,nil,options)
+		s2 << s1
 	end 
 
 	def hour_select(method,options={},html_options={})
