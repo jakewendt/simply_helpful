@@ -33,6 +33,20 @@ Rake::Task['test:units'].prerequisites.unshift(
 @gem_test_dirs ||= []
 @gem_test_dirs << File.expand_path(File.join(File.dirname(__FILE__),
 	'/../../test/unit/helpful/'))
-@gem_test_dirs << File.expand_path(File.join(File.dirname(__FILE__),
-	'/../../test/functional/helpful/'))
+
+
+#
+#	No functional tests so...
+#
+#/Library/Ruby/Gems/1.8/gems/rcov-0.9.9/bin/rcov:516:in `load': no such file to load -- /Library/Ruby/Gems/1.8/gems/jakewendt-simply_helpful-2.2.12/test/functional/helpful/*_test.rb (LoadError)
+#	from /Library/Ruby/Gems/1.8/gems/rcov-0.9.9/bin/rcov:516
+#	from /usr/bin/rcov:19:in `load'
+#	from /usr/bin/rcov:19
+#
+#	Actually, I think the error is because the directory isn't there
+#	because there aren't any files in the gem in that directory.
+#	Perhaps I could try to force it.  Until then, comment this line out.
+#
+#@gem_test_dirs << File.expand_path(File.join(File.dirname(__FILE__),
+#	'/../../test/functional/helpful/'))
 
