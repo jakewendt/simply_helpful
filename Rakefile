@@ -31,6 +31,7 @@ begin
 #		gem.files += FileList['app/**/*.erb']
 		gem.files  = FileList['lib/**/*.rb']
 		gem.files += FileList['lib/**/*.rake']
+		gem.files += FileList['rails/init.rb']
 		gem.files += FileList['generators/**/*']
 		gem.files -= FileList['**/versions/*']
 
