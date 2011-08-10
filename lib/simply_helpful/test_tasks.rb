@@ -31,8 +31,8 @@ Rake::Task['test:units'].prerequisites.unshift(
 #		tests in the context of the application
 #
 @gem_test_dirs ||= []
-@gem_test_dirs << File.expand_path(File.join(File.dirname(__FILE__),
-	'/../../test/unit/helpful/'))
+#@gem_test_dirs << File.expand_path(File.join(File.dirname(__FILE__),
+#	'/../../test/unit/helpful/'))
 
 
 #
@@ -50,3 +50,13 @@ Rake::Task['test:units'].prerequisites.unshift(
 #@gem_test_dirs << File.expand_path(File.join(File.dirname(__FILE__),
 #	'/../../test/functional/helpful/'))
 
+#
+#	More flexible. Find all test files, pick out their dir, uniq 'em and add.
+#
+Dir.glob( File.expand_path(File.join(File.dirname(__FILE__),
+	'/../../test/*/helpful/*_test.rb'))
+).collect{|f|
+	File.dirname(f)
+}.uniq.each{ |dir|
+	@gem_test_dirs << dir
+}
